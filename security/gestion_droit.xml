@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Création de la catégorie -->
+        <record id="cat_projet_gs2e" model="ir.module.category">
+            <field name="name">GS2E</field>
+            <field name="description">Projet GS2E</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Définition des groupes et association à la catégorie -->
+        <record id="group_chef_projet" model="res.groups">
+            <field name="name">Chef du projet</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+        <record id="equipe_dsi" model="res.groups">
+            <field name="name">Equipe DAPSI</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+        <record id="equipe_dpi" model="res.groups">
+            <field name="name">Equipe DPI</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+        <record id="equipe_dit" model="res.groups">
+            <field name="name">Equipe DIT</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+        <record id="group_gestion_certificat" model="res.groups">
+            <field name="name">Gestion certificat</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+        <record id="group_gestion_releve" model="res.groups">
+            <field name="name">Gestion Relevé RQ</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+        <record id="group_comité_decision_gs2e" model="res.groups">
+            <field name="name">Comité de décision</field>
+            <field name="category_id" ref="gestion_demande_changement.cat_projet_gs2e"/>
+        </record>
+
+    </data>
+</odoo>

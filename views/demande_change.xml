@@ -1,0 +1,270 @@
+<odoo>
+  <data>
+            <record model="ir.ui.view" id="view_form_demande_changement">
+            <field name="name">FICHE DE DEMANDE DE CHANGEMENT</field>
+            <field name="model">demande.change</field>
+            <field name="arch" type="xml">
+                <form string="FICHE DE DEMANDE DE CHANGEMENT">
+                      <header>
+                        <button name="soumission" string="Soumettre" states="draft"
+                            type="object" class="oe_highlight"
+                                groups="gestion_demande_changement.group_chef_projet"/>
+
+                           <button name="validation" string="Valider" states="submit"
+                            type="object" class="oe_highlight"
+                                   groups="gestion_demande_changement.group_comité_decision_gs2e"
+                           />
+
+                           <button name="annuler" string="Annuler" states="submit"
+                            type="object" class="oe_highlight"
+                                    groups="gestion_demande_changement.group_comité_decision_gs2e"
+                           />
+
+                         <field name="state" widget="statusbar" nolabel="1"/>
+                    </header>
+                      <sheet>
+                          <div style="border-radius:20px 20px black;color:orange; margin-bottom:20px; padding:10px;text-align:center;font-size:30px;">
+                             FICHE DE DEMANDE DE CHANGEMENT
+                          </div>
+                           <group>
+                                   <group>
+
+                                   </group>
+                                   <group>
+                                       <field name="anne_id"/>
+                                       <field name="dat_cochang"/>
+                                       <field name="name" style="font-size:20;color:red;font-weight:bold;"/>
+                                        <field name="anne_id" style="font-size:20;color:blue;font-weight:bold;"/>
+                                        <field name="chrono_ann" style="font-size:20;color:blue;font-weight:bold;"/>
+                                   </group>
+                           </group>
+                           <group>
+                                   <group>
+                                         <field name="motif_change"/>
+                                   </group>
+                                   <group>
+                                        <field name="perim_concern"/>
+                                   </group>
+                           </group>
+                           <h4 style="border:1px solid black;">1- DESCRIPTION DU CHANGEMENT</h4>
+                           <group>
+                                   <group>
+                                        <h6>DEMANDEUR</h6>
+                                         <field name="demandeur_name"/>
+                                          <field name="demandeur_visa"/>
+                                   </group>
+                                   <group>
+                                        <h6>HIERARCHIE DU DEMANDEUR</h6>
+                                        <field name="demandeur_name_chef"/>
+                                         <field name="demandeur_visa_chef"/>
+                                   </group>
+                           </group>
+                           <field name="descri_change" placeholder="Description"/>
+                                     <h6>RESPONSABLE TECHNIQUE <span style="margin-left:350px;">DATE PREVISIONNELLE DE DEPLOIEMENT</span></h6>
+                            <group>
+                                   <group>
+                                         <field name="destin_name"/>
+                                          <field name="destin_fonct"/>
+                                   </group>
+                                   <group>
+                                        <field name="dat_debut" string="Debut :"/>
+                                         <field name="dat_fin" string="Fin :"/>
+                                   </group>
+                           </group>
+                          <h4 style="border:1px solid black;">2- LISTES DES DOCUMENTS JOINTS</h4>
+                          <group>
+                                   <group>
+                                         <field name="ordre_deploi"/>
+                                          <field name="opt2"/>
+                                          <field name="opt3"/>
+                                          <field name="numero_ysi"/>
+                                          <field name="opt5"/>
+                                          <field name="opt6"/>
+                                          <field name="opt7"/>
+                                          <field name="opt8"/>
+                                   </group>
+                                   <group>
+                                        <field name="opt9"/>
+                                         <field name="opt10"/>
+                                        <field name="opt11"/>
+                                         <field name="opt12"/>
+                                        <field name="opt13"/>
+                                         <field name="opt14"/>
+                                        <field name="opt15"/>
+                                         <field name="opt16"/>
+                                         <field name="opt17"/>
+                                          <field name="opt18"/>
+                                   </group>
+                           </group>
+                          <h4 style="border:1px solid black;">3- ANALYSE DE L'IMPACT DU CHANGEMENT <span style="margin-left:200px;">4- RISQUES ET PLAN D'ACTION DE RETOUR ARRIERE</span></h4>
+                           <group>
+                                   <group>
+                                          <field name="analyse_impact"/>
+                                   </group>
+                                   <group>
+                                        <field name="risque"/>
+                                         <field name="pla_act_ret"/>
+                                   </group>
+                           </group>
+                             <h4 style="border:1px solid black;">5- DECISION DU COMITE DE GESTION DES CHANGEMENTS</h4>
+                            <group>
+                                   <group>
+                                        <h6>GESTIONNAIRE DE CHANGEMENT</h6>
+                                          <field name="gestionnaire_name"/>
+                                   </group>
+                                   <group>
+                                        <field name="dat_affect"/>
+                                         <field name="dat_traitemnt"/>
+                                   </group>
+                           </group>
+                          <notebook groups='gestion_demande_changement.group_comité_decision_gs2e'>
+                                <page  string="COMITÉ DE DECISION" >
+                                      <h4 style="border:1px solid black;">OBSERVATIONS DU COMITE DE GESTION DES CHANGEMENTS</h4>
+                                      <group>
+                                           <group>
+                                              <field name="obser_bloquant"/>
+                                           </group>
+                                           <group>
+                                                <field name="obser_non_bloquant"/>
+                                           </group>
+                                      </group>
+                                     <h4 style="border:1px solid black;">APPROBATION DU COMITE DE GESTION DES CHANGEMENTS</h4>
+                                     <field name="visa_membre" placeholder="Visa des membres"/>
+                                     <group>
+                                           <group>
+                                               <h4>Avis</h4>
+                                              <field name="decision_accor" attrs="{'invisible': [('decision_refus', '=', True)]}"  options="{'no_create_edit': True}"/>
+                                               <field name="chrono_ann"/>
+                                               <field name="dat_accept"/>
+                                               <field name="nom_presi_seance"/>
+                                           </group>
+                                           <group >
+                                                <h4>En cas de refus, date du prochain passage au comité :</h4>
+                                                <field name="decision_refus"  attrs="{'invisible': [('decision_accor', '=', True)]}"  options="{'no_create_edit': True}"/>
+                                                <field name="dat_refus"/>
+                                                <field name="comm_refu"/>
+                                           </group>
+                                      </group>
+                                      <h4 style="border:1px solid black;">6- DECISION 2  DU COMITE DE  GESTION DES CHANGEMENTS</h4>
+                                     <group>
+                                           <group>
+                                               <h4>Président</h4>
+                                               <field name="president_change"/>
+                                           </group>
+                                           <group>
+                                                <field name="dat_trait_change"/>
+                                                <field name="dat_recep_change"/>
+                                           </group>
+                                      </group>
+                                     <h4 style="border:1px solid black;">OBSERVATIONS DU COMITE DE  GESTION DES CHANGEMENTS</h4>
+                                     <field name="obser_comi_change"/>
+                                     <h4 style="border:1px solid black;">APPROBATION DU COMITE DE GESTION DES CHANGEMENTS </h4>
+                                    <group>
+                                           <group>
+                                               <field name="visa_membre_approb"/>
+                                           </group>
+                                           <group>
+                                               <h4>Avis</h4>
+                                                <field name="decision_fin"/>
+                                                <field name="chrono_ann"/>
+                                               <field name="dat_accept_approb"/>
+                                                <field name="nom_presi_seance_approb"/>
+                                           </group>
+                                      </group>
+                                </page>
+                        </notebook>
+                      </sheet>
+                    <div class="oe_chatter">
+                         <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+              <!-- la view tree -->
+             <record model="ir.ui.view" id="view_tree_demande_changement">
+                  <field name="name">FICHE DE DEMANDE DE CHANGEMENT</field>
+                  <field name="model">demande.change</field>
+                  <field name="arch" type="xml">
+                    <tree string="FICHE DE DEMANDE DE CHANGEMENT"
+                    >
+                              <field name="state"/>
+                              <field name="dat_cochang" string="Date cochange"/>
+                              <field name="name" string="Numero"/>
+                              <field name="motif_change" string="Motif"/>
+                              <field name="perim_concern" string="Périmetre concerné"/>
+                               <field name="demandeur_name" string="Nom du demandeur"/>
+                               <field name="demandeur_name_chef" string="Nom du chef"/>
+                               <field name="descri_change_short" string="Description"/>
+                              <field name="destin_name" string="Nom du destinateur"/>
+                               <field name="destin_fonct" string="Fonction destinateur"/>
+                               <field name="dat_debut" string="Date debut deploie.."/>
+                               <field name="dat_fin" string="Date fin deploie..."/>
+                              <field name="analyse_impact_short" string="Analyse ...."/>
+                              <field name="risque_short" string="Risques" optional="hide"/>
+                              <field name="pla_act_ret_short" string="Plan action ..." optional="hide"/>
+                              <field name="gestionnaire_name" string="Nom gestionnaire" optional="hide"/>
+                              <field name="dat_affect" string="Date Affectation" optional="hide"/>
+                              <field name="dat_traitemnt" string="Date de traitement" optional="hide"/>
+                              <field name="obser_bloquant_short" string="OBSERVATIONS BLOQUANTES"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="obser_non_bloquant_short" string="OBSERVATIONS NON BLOQUANTES"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="visa_membre_short" string="VISA DES MEMBRES"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="decision_accor" string="ACCORD"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="decision_refus" string="REFUS"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="dat_accept" string="DATE ACCEPTE"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="nom_presi_seance" string="PRESIDENT DE SEANCE"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="dat_refus" string="DATE REFUS"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="comm_refu_short" string="COMMENTAIRE"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                              <field name="dat_trait_change" string="DATE DE RECEPTION"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+                               <field name="dat_recep_change" string="DATE DE TRAITEMENT"
+                                      groups="gestion_demande_changement.group_comité_decision_gs2e" optional="hide"/>
+
+        </tree>
+      </field>
+    </record>
+
+              <record id="view_seach_demande_changement" model="ir.ui.view">
+                    <field name="name">FICHE DE DEMANDE DE CHANGEMENT</field>
+                    <field name="model">demande.change</field>
+                    <field name="arch" type="xml">
+                        <search string="DEMANDE CHANGEMENT">
+                            <field name="name" string="Numéro "/>
+                            <group expand="0" string="Group By">
+                                <filter string="année en cours" name="anne_id" domain="[]" context="{'group_by': 'anne_id'}"  />
+                            </group>
+                        </search>
+                    </field>
+            </record>
+
+             <!-- la view action -->
+            <record model="ir.actions.act_window" id="view_action_demande_changeent">
+                  <field name="name">FICHE DE DEMANDE DE CHANGEMENT</field>
+                  <field name="res_model">demande.change</field>
+                  <field name="view_mode">tree,form</field>
+                  <field name="context">{'search_default_anne_id':True}</field>
+            </record>
+
+
+
+       <record id="action_server_demande_changement" model="ir.actions.server">
+                <field name="name">Imprimer la demande</field>
+                <field name="model_id" ref="model_demande_change"/>
+                <field name="state">code</field>
+                <field name="code">
+                    if records:
+                          action = records.imprimer_demande()
+                </field>
+         </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,391 @@
+<odoo>
+    <data>
+         <template id="wizard_report_pdf_demande_changement">
+             <t t-call="web.html_container">
+                 <t t-call="web.internal_layout">
+                     <div class="page">
+                          <style>
+                              table{
+                                  border:1px solid black;
+                                   font-family: "Helvetica", "Arial", sans-serif;
+                              }
+                              table td { border:1px solid black;
+                                         }
+                              table tr td h6 {
+                                               font-size:16px;
+                                               font-weight:bold;
+                                         }
+                              div span{
+                                    font-size:15px;
+                              }
+                          </style>
+                                 <t t-foreach="resultat" t-as="line">
+                                     <table style="width:100%;font-size:16px;font-family:Ariel;border:1px solid black;" class="table">
+                                         <tr>
+                                             <td colspan="2" style="text-align:center;font-weight:bold;" >FICHE DE DEMANDE DE CHANGEMENT</td></tr>
+                                         <tr>
+                                             <td style="width:800px;padding-left:2px;" valign="center"></td>
+                                             <td style="width:800px;padding-left:2px;" valign="center">
+                                                 <div><span style="font-weight:bold; margin-left:5px;">Date cochange :</span>
+                                                     <t t-if="dat1">
+                                                          <span t-esc="dat1" style="margin-left:5px;"/>
+                                                     </t>
+                                                 </div>
+                                                 <div><span style="font-weight:bold;margin-left:5px;">Numéro d'ordre :</span><span t-esc="line['name']" style="margin-left:5px;"/></div>
+                                                 <div><span style="font-weight:bold;margin-left:5px;">Année en cours :</span><span t-esc="line['anne_id'][1]" style="margin-left:5px;"/></div>
+                                                 <div><span style="font-weight:bold;margin-left:5px;">Chrono :</span><span t-esc="line['chrono_ann']" style="margin-left:5px;"/>  </div>
+                                             </td>
+                                         </tr>
+                                          <tr>
+                                             <td style="width:800px;padding-left:2px;" valign="center">
+                                                 <span style="font-weight:bold;margin-left:5px;">Motif :</span><span t-esc="line['motif_change']" style="margin-left:5px;"/>
+                                             </td>
+                                             <td style="width:800px;padding-left:2px;margin-left:5px;" valign="center">
+                                                 <span style="font-weight:bold;">Périmetre concerné :</span><span t-esc="line['perim_concern']" style="margin-left:5px;"/></td>
+                                         </tr>
+                                          <tr>
+                                               <td colspan="2" style="width:100%;padding-left:2px;font-weight:bold;">
+                                                   1- DESCRIPTION DU CHANGEMENT
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                             <td style="width:50%;padding-left:2px;">
+                                                 <h6 style="font-weight:bold;">DEMANDEUR</h6>
+                                                  <div><span style="font-weight:bold;margin-left:5px;">Nom et prénom(s):</span><span t-esc="line['name_dem']" style="margin-left:5px;"/></div>
+                                             </td>
+                                              <td style="width:50%;padding-left:2px;">
+                                                     <h6 style="font-weight:bold;">HIERARCHIE DU DEMANDEUR</h6>
+                                                 <div><span style="font-weight:bold;margin-left:5px;">Nom et prénom(s):</span><span t-esc="line['nom_chef_dem']" style="margin-left:5px;"/></div>
+                                                </td>
+                                         </tr>
+                                          <tr>
+                                               <td colspan="2" style="height:20px; width:100%;padding-left:2px;">
+                                                    <h6>Description</h6>
+                                                 <span t-esc="line['descri_change']"/>
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style="font-weight:bold;">RESPONSABLE TECHNIQUE</h6>
+                                                          <div><span style="font-weight:bold;margin-left:5px;">Nom et prénom(s):</span><span t-esc="line['nom_destin']" style="margin-left:5px;"/></div>
+                                                         <div><span style="font-weight:bold;margin-left:5px;">Fonction:</span><span t-esc="line['destin_fonct']" style="margin-left:5px;"/></div>
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style="font-weight:bold;">DATE PREVISIONNELLE DE DEPLOIEMENT</h6>
+                                                         <div><span style="font-weight:bold;margin-left:5px;">DEBUT:</span><span t-esc="dat_debut" style="margin-left:5px;"/></div>
+                                                            <div><span style="font-weight:bold;margin-left:5px;">FIN:</span><span t-esc="dat_fin" style="margin-left:5px;"/></div>
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                  2- LISTES DES DOCUMENTS JOINTS
+                                              </td>
+                                          </tr>
+
+                                            <tr>
+                                               <td style="width:50%;padding-left:2px;" valign="center">
+                                                          <div><span style="font-weight:bold; margin-right:5px;">1-Ordre de deploiement :</span>
+                                                               <t t-if="line['ordre_deploi']">
+                                                                   <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                          </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">2-Check-list des actions du deploiement :</span>
+                                                             <t t-if="line['opt2']">
+                                                               <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+
+                                                         </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">3-Accord DGA domaine ou responsable MOA (Mail ou CR réunion):  </span>
+                                                              <t t-if="line['opt3']">
+                                                               <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">4-Fiche Easyvista (DI,DS...) N°............ :</span>
+                                                             <span t-esc="line['numero_ysi']"/>
+                                                         </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">5-Rapport ou planning de formation utilisateur :</span>
+                                                              <t t-if="line['opt5']">
+                                                                 <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">6-Rapport de tests :</span>
+                                                              <t t-if="line['opt6']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+
+                                                         </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">7-Document d'installation et de confiuration :</span>
+                                                              <t t-if="line['opt7']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">8-Document d'exploitation :</span>
+                                                              <t t-if="line['opt8']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+
+                                                         </div>
+                                               </td>
+                                               <td style="width:50%;padding-left:2px;" valign="center">
+                                                        <div><span style="font-weight:bold; margin-right:5px;">9-Entrée EZV :</span>
+                                                             <t t-if="line['opt9']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+
+                                                        </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">10-Accord du CVATL :</span>
+                                                              <t t-if="line['opt10']">
+                                                                 <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">11-Fiche d'evaluation PRI :</span>
+                                                              <t t-if="line['opt11']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">12-Fiche de Supervision de l'application :</span>
+                                                              <t t-if="line['opt12']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">13-Planification des traitements dans l'ORDONNANCEUR :</span>
+                                                              <t t-if="line['opt13']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">14-Rapport RSE :</span>
+                                                              <t t-if="line['opt14']">
+                                                                <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+
+                                                         </div>
+                                                         <div><span style="font-weight:bold; margin-right:5px;">15-Propriété intellectuelle :..... :</span>
+                                                              <t t-if="line['opt15']">
+                                                                 <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">16-Preuve d'existence ou pas d'un certificat :</span>
+                                                              <t t-if="line['opt16']">
+                                                                 <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">17-Autres (A preciser)...........</span>
+                                                              <t t-if="line['opt17']">
+                                                                 <input type="checkbox" t-att-checked="'checked'"/>
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                         </div>
+                                               </td>
+                                         </tr>
+                                            <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             3- ANALYSE DE L'IMPACT DU CHANGEMENT</h6>
+                                                          <div><span t-esc="line['analyse_impact']"/></div>
+
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                                 4- RISQUES ET PLAN D'ACTION DE RETOUR ARRIERE</h6>
+                                                         <div>
+                                                              <h6 style="font-weight:bold;">Risques</h6>
+                                                               <span t-esc="line['risque']"/>
+                                                         </div>
+                                                            <div>
+                                                                <h6 style="font-weight:bold;">Plan d'action de retour arriere:</h6>
+                                                                <span t-esc="line['pla_act_ret']"/>
+                                                            </div>
+                                                    </td>
+                                         </tr>
+                                            <tr>
+                                               <td colspan="2" style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                  5- DECISION DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                            <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style="font-weight:bold;">GESTIONNAIRE DE CHANGEMENT</h6>
+                                                          <div><span style="font-weight:bold; margin-right:5px;">Nom et prénom(s):</span><span t-esc="line['nom_gestion']"/></div>
+                                                         <div><span style="font-weight:bold;">Visa:</span></div>
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style="font-weight:bold;">DATE PREVISIONNELLE DE DEPLOIEMENT</h6>
+                                                             <div><span style="font-weight:bold;margin-right:5px;">Date de reception :</span><span t-esc="dat_reception"/></div>
+                                                             <div><span style="font-weight:bold;margin-right:5px;">Date traitement :</span><span t-esc="dat_traitement"/></div>
+                                                    </td>
+                                         </tr>
+                                          <tr>
+                                               <td colspan="2" style="width:100%;padding-left:2px;font-weight:bold;">
+                                                  OBSERVATIONS DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             OBSERVATIONS BLOQUANTES :</h6>
+                                                          <div><span t-esc="line['obser_bloquant']"/></div>
+
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                                 OBSERVATIONS NON BLOQUANTES :</h6>
+                                                           <div><span t-esc="line['obser_non_bloquant']"/></div>
+
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                  APPROBATION DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                               <td colspan="2">
+                                                   <h6>Visa des membres</h6>
+                                                 <div><span t-esc="line['visa_membre']"/></div>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             AVIS</h6>
+                                                          <div><span style="font-weight:bold;margin-right:5px;">Accord :
+                                                          </span>
+<!--                                                              <span t-esc="line['decision_accor']"/>-->
+                                                                <t t-if="line['decision_accor']">
+                                                                      <img src="/gestion_demande_changement/static/img/accord_v1.png" height="110" width="250"/>
+<!--                                                                <input type="checkbox" t-att-checked="'checked'"/>-->
+                                                             </t>
+                                                             <t t-else="">
+                                                                   <input type="checkbox" />
+                                                             </t>
+                                                          </div>
+                                                          <div><span style="font-weight:bold;margin-right:5px;">N°chrono :</span><span t-esc="line['chrono_ann']"/></div>
+                                                          <div><span style="font-weight:bold;margin-right:5px;">Date :</span><span t-esc="dat_accept"/></div>
+                                                          <div><span style="font-weight:bold;margin-right:5px;">President de seance :</span><span t-esc="line['no_presi_sean']"/></div>
+
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style=" width:100%;padding-left:2px;">
+                                                                 En cas de refus, date du prochain passage au comité </h6>
+                                                              <div><span style="font-weight:bold;margin-right:5px;">Refus :</span>
+<!--                                                                  <span t-esc="line['decision_refus']"/>-->
+                                                                      <t t-if="line['decision_refus']">
+                                                                          <img src="/gestion_demande_changement/static/img/refus_v1.png" height="110" width="250"/>
+<!--                                                                         <input type="checkbox" t-att-checked="'checked'"/>-->
+                                                                      </t>
+                                                                     <t t-else="">
+                                                                       <input type="checkbox" />
+                                                                    </t>
+                                                              </div>
+                                                              <div><span style="font-weight:bold;margin-right:5px;">Date :</span><span t-esc="dat_refus"/></div>
+                                                              <div><span style="font-weight:bold;margin-right:5px;">Commentaire :</span><span t-esc="line['comm_refu']"/></div>
+
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style="width:100%;padding-left:2px;font-weight:bold;">
+                                                  6- DECISION 2  DU COMITE DE  GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             President </h6>
+                                                          <div><span style="font-weight:bold;margin-right:5px;">Nom et prénom(s) :</span><span t-esc="line['no_presi_chan']"/></div>
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                               <div><span style="font-weight:bold;margin-right:5px;">Date de reception :</span><span t-esc="dat_reception_cha"/></div>
+                                                              <div><span style="font-weight:bold;margin-right:5px;">Date de traitement :</span><span t-esc="dat_traitement_cha"/></div>
+
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style="width:100%;padding-left:2px;font-weight:bold;">
+                                                 OBSERVATIONS DU COMITE DE  GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                               <td colspan="2" style=" width:100%;padding-left:2px;">
+                                                    <div><span t-esc="line['obser_comi_change']"/></div>
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                               <td colspan="2" style="width:100%;padding-left:2px;font-weight:bold;">
+                                                 APPROBATION DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                               <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style=" width:100%;padding-left:2px; font-weight:bold;">
+                                                                 Visas des membres</h6>
+                                                           <div><span t-esc="line['visa_membre_approb']"/></div>
+
+
+                                                    </td>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             AVIS</h6>
+                                                          <div><span style="font-weight:bold;margin-right:5px;">Decision :</span><span t-esc="line['decision_fin']"/></div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">N°chrono :</span><span t-esc="line['chrono_ann']"/></div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">Date :</span><span t-esc="dat_app"/></div>
+                                                         <div><span style="font-weight:bold;margin-right:5px;">President de seance :</span><span t-esc="line['no_presi_sean_apro']"/></div>
+
+                                                     </td>
+
+                                         </tr>
+
+                                     </table>
+                                 </t>
+                          </div>
+                 </t>
+             </t>
+         </template>
+    </data>
+</odoo>

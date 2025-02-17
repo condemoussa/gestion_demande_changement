@@ -1,0 +1,247 @@
+<odoo>
+    <data>
+        <!-- Utilisez "portrait" ou "landscape" selon votre choix -->
+          <report
+                id="report_pdf_demande_changement_gs2e"
+                model="demande.change"
+                string="DEMANDE DE CHANGEMENT"
+                name="gestion_demande_changement.report_demande_changemnt_template_id_gs2E"
+                file="gestion_demande_changement.report_demande_changemnt_template_id_gs2E"
+                report_type="qweb-pdf"
+
+
+          />
+         <template id="report_demande_changemnt_template_id_gs2E">
+             <t t-call="web.html_container">
+                 <t t-call="web.basic_layout">
+
+                          <div class="page">
+                              <link rel="stylesheet" href="/gestion_demande_changement/static/src/css/demande_changement.css.css"/>
+                                 <t t-foreach="docs" t-as="o">
+                                      <table style="width:100%;font-family:Times, Times New Roman, serif;font-size:12px;">
+                                         <tr>
+                                             <td colspan="2" style="text-align:center;font-weight:bold;" >FICHE DE DEMANDE DE CHANGEMENT</td></tr>
+                                         <tr>
+                                             <td style="width:50%;padding-left:2px;" valign="center"></td>
+                                             <td style="width:50%;padding-left:2px;" valign="center">
+                                                 <div><span style="font-weight:bold;">Date cochange :</span><span t-field="o.dat_cochang"/></div>
+                                                 <div><span style="font-weight:bold;">Numero d'ordre :</span><span t-field="o.name"/></div>
+                                                 <div><span style="font-weight:bold;">Année en cour :</span><span t-field="o.anne_id.annee_en_cours"/></div>
+                                                 <div><span style="font-weight:bold;">Chrono :</span><span t-field="o.chrono_ann"/>  </div>
+                                             </td>
+                                         </tr>
+                                          <tr>
+                                             <td style="width:50%;padding-left:2px;" valign="center">
+                                                 <span style="font-weight:bold;">Motif :</span><span t-field="o.motif_change"/>
+                                             </td>
+                                             <td style="width:50%;padding-left:2px;" valign="center">
+                                                 <span style="font-weight:bold;">Périmetre concerné :</span><span t-field="o.perim_concern"/></td>
+                                         </tr>
+                                          <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                   1- DESCRIPTION DU CHANGEMENT
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                             <td style="width:50%;padding-left:2px;">
+                                                 <h6 style="font-weight:bold;border:1px solid black;">DEMANDEUR</h6>
+                                                  <div><span style="font-weight:bold;">Nom et prénom(s):</span><span t-field="o.demandeur_name"/></div>
+                                             </td>
+                                              <td style="width:50%;padding-left:2px;">
+                                                     <h6 style="font-weight:bold;border: 1px solid black;">HIERARCHIE DU DEMANDEUR</h6>
+                                                 <div><span style="font-weight:bold;">Nom et prénom(s):</span><span t-field="o.demandeur_name_chef"/></div>
+                                                </td>
+                                         </tr>
+                                          <tr>
+                                               <td colspan="2" style="border:1px solid black;height:20px; solid black; width:100%;padding-left:2px;">
+                                                    <h6>Description</h6>
+                                                 <span t-field="o.descri_change"/>
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style="font-weight:bold;border:1px solid black;">RESPONSABLE TECHNIQUE</h6>
+                                                          <div><span style="font-weight:bold;">Nom et prénom(s):</span><span t-field="o.destin_name"/></div>
+                                                         <div><span style="font-weight:bold;">Fonction:</span><span t-field="o.destin_fonct"/></div>
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style="font-weight:bold;border:1px solid black;">DATE PREVISIONNELLE DE DEPLOIEMENT</h6>
+                                                         <div><span style="font-weight:bold;">DEBUT:</span><span t-field="o.dat_debut"/></div>
+                                                            <div><span style="font-weight:bold;">FIN:</span><span t-field="o.dat_fin"/></div>
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                  2- LISTES DES DOCUMENTS JOINTS
+                                              </td>
+                                          </tr>
+
+                                            <tr>
+                                               <td style="width:50%;padding-left:2px;" valign="center">
+                                                          <div><span style="font-weight:bold;">Ordre de deploiement :</span><span t-field="o.ordre_deploi"/></div>
+                                                         <div><span style="font-weight:bold;">Check-list des actions du deploiement :</span><span t-field="o.opt2"/></div>
+                                                         <div><span style="font-weight:bold;">Accord DGA domaine ou responsable MOA (Mail ou CR réunion):  </span><span t-field="o.opt3"/></div>
+                                                         <div><span style="font-weight:bold;">Fiche Easyvista (DI,OS...) N°............ :</span><span t-field="o.opt4"/></div>
+                                                         <div><span style="font-weight:bold;">Rapport ou planning de formation utilisateur :</span><span t-field="o.opt5"/></div>
+                                                         <div><span style="font-weight:bold;">Rapport de tests :</span><span t-field="o.opt6"/></div>
+                                                         <div><span style="font-weight:bold;">Document d'installation et de confiuration :</span><span t-field="o.opt7"/></div>
+                                                         <div><span style="font-weight:bold;">Document d'exploitation :</span><span t-field="o.opt8"/></div>
+                                               </td>
+                                               <td style="width:50%;padding-left:2px;" valign="center">
+                                                        <div><span style="font-weight:bold;">Entrée EZV :</span><span t-field="o.opt9"/></div>
+                                                         <div><span style="font-weight:bold;">Accord du CVATL :</span><span t-field="o.opt10"/></div>
+                                                         <div><span style="font-weight:bold;">Fiche d'evaluation PRI :</span><span t-field="o.opt11"/></div>
+                                                         <div><span style="font-weight:bold;">Fiche de Supervision de l'application :</span><span t-field="o.opt12"/></div>
+                                                         <div><span style="font-weight:bold;">Planification des traitements dans l'ORDONNANCEUR :</span><span t-field="o.opt13"/></div>
+                                                         <div><span style="font-weight:bold;">Rapport RSE :</span><span t-field="o.opt14"/></div>
+                                                         <div><span style="font-weight:bold;">Propriété intellectuelle :..... :</span><span t-field="o.opt15"/></div>
+                                                         <div><span style="font-weight:bold;">Preuve d'existence ou pas d'un certificat :</span><span t-field="o.opt16"/></div>
+                                                         <div><span style="font-weight:bold;">Autres (A preciser)...........</span><span t-field="o.opt17"/></div>
+                                               </td>
+                                         </tr>
+                                            <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                             3- ANALYSE DE L'IMPACT DU CHANGEMENT</h6>
+                                                          <div><span t-field="o.analyse_impact"/></div>
+
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                                 4- RISQUES ET PLAN D'ACTION DE RETOUR ARRIERE</h6>
+                                                         <div>
+                                                              <h6 style="font-weight:bold;border:1px solid black;">Risques</h6>
+                                                               <span t-field="o.risque"/>
+                                                         </div>
+                                                            <div>
+                                                                <h6 style="font-weight:bold;border:1px solid black;">Plan d'action de retour arriere:</h6>
+                                                                <span t-field="o.pla_act_ret"/>
+                                                            </div>
+                                                    </td>
+                                         </tr>
+                                            <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                  5- DECISION DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                            <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style="font-weight:bold;border:1px solid black;">GESTIONNAIRE DE CHANGEMENT</h6>
+                                                          <div><span style="font-weight:bold;">Nom et prénom(s):</span><span t-field="o.gestionnaire_name"/></div>
+                                                         <div><span style="font-weight:bold;">Visa:</span></div>
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style="font-weight:bold;border:1px solid black;">DATE PREVISIONNELLE DE DEPLOIEMENT</h6>
+                                                             <div><span style="font-weight:bold;">Date de reception :</span><span t-field="o.dat_affect"/></div>
+                                                            <div><span style="font-weight:bold;">Date traitement :</span><span t-field="o.dat_traitemnt"/></div>
+                                                    </td>
+                                         </tr>
+                                          <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                  OBSERVATIONS DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                             OBSERVATIONS BLOQUANTES :</h6>
+                                                          <div><span t-field="o.obser_bloquant"/></div>
+
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                                 OBSERVATIONS NON BLOQUANTES :</h6>
+                                                           <div><span t-field="o.obser_non_bloquant"/></div>
+
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                  APPROBATION DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                               <td colspan="2">
+                                                 <div><span t-field="o.visa_membre"/></div>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;border:1px solid black;">
+                                                             AVI</h6>
+                                                          <div><span style="font-weight:bold;">ACCORD :</span><span t-field="o.decision_accor"/></div>
+                                                          <div><span style="font-weight:bold;">N°CHONO :</span><span t-field="o.chrono_ann"/></div>
+                                                          <div><span style="font-weight:bold;">Date :</span><span t-field="o.dat_accept"/></div>
+                                                          <div><span style="font-weight:bold;">PRESIDENT DE SEANCE :</span><span t-field="o.nom_presi_seance"/></div>
+
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h4 style=" width:100%;padding-left:2px;border:1px solid black;">
+                                                                 En cas de refus, date du prochain passage au comité </h4>
+                                                              <div><span style="font-weight:bold;">Refus :</span><span t-field="o.decision_refus"/></div>
+                                                              <div><span style="font-weight:bold;">Date :</span><span t-field="o.dat_refus"/></div>
+                                                              <div><span style="font-weight:bold;">Commentaire :</span><span t-field="o.comm_refu"/></div>
+
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                  6- DECISION 2  DU COMITE DE  GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h4 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             President </h4>
+                                                          <div><span style="font-weight:bold;">Nom et prénom(s):</span><span t-field="o.president_change"/></div>
+                                                     </td>
+                                                      <td style="width:50%;padding-left:2px;" valign="center">
+                                                               <div><span style="font-weight:bold;">Date de reception :</span><span t-field="o.dat_trait_change"/></div>
+                                                              <div><span style="font-weight:bold;">Date de traitement :</span><span t-field="o.dat_recep_change"/></div>
+
+                                                    </td>
+                                         </tr>
+                                           <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                 OBSERVATIONS DU COMITE DE  GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;">
+                                                    <div><span t-field="o.obser_comi_change"/></div>
+                                              </td>
+                                          </tr>
+                                           <tr>
+                                               <td colspan="2" style="border:1px solid black; width:100%;padding-left:2px;font-weight:bold;">
+                                                 APPROBATION DU COMITE DE GESTION DES CHANGEMENTS
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                               <td style="width:50%;padding-left:2px;" valign="center">
+                                                             <h6 style=" width:100%;padding-left:2px; font-weight:bold;">
+                                                                 Visas des membres</h6>
+                                                           <div><span t-field="o.visa_membre_approb"/></div>
+
+
+                                                    </td>
+                                                     <td style="width:50%;padding-left:2px;" valign="center">
+                                                         <h6 style=" width:100%;padding-left:2px;font-weight:bold;">
+                                                             AVI</h6>
+                                                          <div><span style="font-weight:bold;">DECISION :</span><span t-field="o.decision_fin"/></div>
+                                                         <div><span style="font-weight:bold;">"N°CHONO :</span><span t-field="o.chrono_ann"/></div>
+                                                         <div><span style="font-weight:bold;">Date :</span><span t-field="o.dat_accept_approb"/></div>
+                                                         <div><span style="font-weight:bold;">PRESIDENT DE SEANCE :</span><span t-field="o.nom_presi_seance_approb"/></div>
+
+                                                     </td>
+
+                                         </tr>
+
+                                     </table>
+                                 </t>
+                          </div>
+
+                 </t>
+             </t>
+         </template>
+    </data>
+</odoo>

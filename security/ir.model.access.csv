@@ -1,0 +1,8 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_demande_change,demande.change,model_demande_change,,1,1,1,1
+access_demande_change_report,demande.change.report,model_demande_change_report,,1,1,1,1
+
+
+
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_rapport_demande_change_form">
+            <field name="name">DEMANDE CHANGEMENT REPORT</field>
+            <field name="model">demande.change.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="DEMANDE DE CHANGEMENTT">
+                    <sheet>
+                        <group>
+                         <field name="numero_de"/>
+                        </group>
+                    </sheet>
+                    <shooter>
+                        <button name="test" type="object" string="Imprimer"/>
+                    </shooter>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_rapport_demande_change_form_view">
+            <field name="name">DEMANDE CHANGEMENT REPORT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">demande.change.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="wizard_rapport_demande_change_form"/>
+        </record>
+
+
+        <record id="action_rapport_demande_changement_pdf" model="ir.actions.report">
+            <field name="name">DEMANDE DE CHANGEMENT REPORT</field>
+            <field name="model">demande.change.report</field>
+            <field name="binding_model_id" ref="model_demande_change_report"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">gestion_demande_changement.wizard_report_pdf_demande_changement</field>
+            <field name="report_file">gestion_demande_changement.wizard_report_pdf_demande_changement</field>
+            <field name="binding_view_types">list</field>
+        </record>
+
+    </data>
+</odoo>
